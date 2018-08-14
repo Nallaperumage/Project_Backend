@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div>
+      <p><%= userData %></p>
+      <article class="user">
+        <div>Name : {{name}}</div>
+        <div>Email : {{this.email}}</div>
+        <div>Password : {{this.password}}</div>
+        <div>Id : {{this.id}}</div>
+      </article>
+    </div>
+    <app-root></app-root>
+  </body>
+</html>
