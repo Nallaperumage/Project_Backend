@@ -24,7 +24,7 @@ router.get('/',function(req, res, next) {
 
 
 
-router.get('/user/profile', auth, ctrlProfile.profileRead);
+router.get('/user/personal-data', auth, ctrlProfile.profileRead);
 router.get('/dataPage', getData.getData);
 router.post('/login', authentication.login);
 router.post('/signUp', authentication.register);

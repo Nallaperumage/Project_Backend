@@ -55,6 +55,39 @@ var userSchema = new Schema({
 
 },{ collection : 'newUsers'});
 
+var loggedRouteSchema = new Schema({
+  userName : {
+    type : String,
+    unique: true,
+    required: true
+  },
+  email : {
+    type : String,
+    unique: true,
+    required: true
+  },
+  role: {
+    type : String,
+    required: true
+  }
+
+},{ collection : 'newUsers'});
+
+var loginCookieSchema = new Schema({
+  userName : {
+    type : String,
+    unique: true,
+    required: true
+  },
+  email : {
+    type : String,
+    unique: true,
+    required: true
+  }
+
+},{ collection : 'newUsers'});
+
+
 
 userSchema.methods.setPassword = function(password){
   this.salt = crypto.randomBytes(16).toString('hex');
@@ -66,9 +99,10 @@ userSchema.methods.validPassword = function(password) {
   return this.hash === hash;
 };
 
+
 userSchema.methods.generateJwt = function() {
   var expiry = new Date();
-  expiry.setDate(expiry.getDate() + 7);
+  expiry.setDate(expiry.getDate() + 1);
 
   return jwt.sign({
     _id: this._id,
@@ -77,6 +111,29 @@ userSchema.methods.generateJwt = function() {
     userName: this.userName,
     email: this.email,
     role: this.role,
+    exp: parseInt(expiry.getTime() / 1000),
+  }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+};
+
+loggedRouteSchema.methods.generateJwt = function() {
+  var expiry = new Date();
+  expiry.setDate(expiry.getDate() + 1);
+
+  return jwt.sign({
+    userName: this.userName,
+    email: this.email,
+    role: this.role,
+    exp: parseInt(expiry.getTime() / 1000),
+  }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+};
+
+loginCookieSchema.methods.generateJwt = function() {
+  var expiry = new Date();
+  expiry.setDate(expiry.getDate() + 30);
+
+  return jwt.sign({
+    userName: this.userName,
+    email: this.email,
     exp: parseInt(expiry.getTime() / 1000),
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };

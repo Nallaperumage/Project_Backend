@@ -33,7 +33,8 @@ app.use(bodyParser.json({limit:'5mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, './angular/dist')));
+app.use(express.static(path.join(__dirname,'/', './angular/dist')));
+app.use(express.static(path.join(__dirname,'/user', './angular/dist')));
 app.use(session({ 
   secret: 'keyboard cat',
   resave: false,
