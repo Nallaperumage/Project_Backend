@@ -6,6 +6,11 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+// var stripe = require('stripe')('sk_test_ooaPZFrmnKS49hg1rvtU0KEv');
+
+// var customer = await stripe.customers.create(
+//   { email: 'gmadhushann@gmail.com' }
+// );
 
 require('./public/javascripts/Models/userModel');
 require('./public/javascripts/Models/dataModel');
@@ -14,8 +19,6 @@ require('./public/javascripts/Controllers/authentication');
 require('./public/javascripts/Controllers/profile');
 require('./public/javascripts/Controllers/getData');
 var index = require('./routes/index');
-var users = require('./routes/users');
-var mongo = require('./routes/mongo');
 
 
 
@@ -34,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname,'/', './angular/dist')));
-app.use(express.static(path.join(__dirname,'/user', './angular/dist')));
+
 app.use(session({ 
   secret: 'keyboard cat',
   resave: false,
@@ -47,8 +50,6 @@ app.use(passport.session());
 
 
 app.use('/', index);
-app.use('/users', users);
-app.use('/mongo', mongo);
 
 
 //Send all other requests to angular app

@@ -11,40 +11,49 @@ var db = mongoose.connect('mongodb://localhost:27017/test', function(err, respon
 
 var Schema = mongoose.Schema;
 
-// var testSchema = new Schema({
+var testsSchema = new Schema({
+    _id : String,
+    // investigation_id : [investigationSchema],
+    name : String,
+    type : String,
+    test : String,
+    location : {
+      latitude : String,
+      longitude : String
+    },
+    data : [
+      {
+        x: String,
+        y: String
+      }
+    ]
+  
+},{ collection : 'Tests'});
+
+// var investigationSchema = new Schema({
 //     _id : String,
-//     // investigation_id : [investigationSchema],
 //     name : String,
-//     readings : String,
-//     charts : String,
+//     classification_id : String,
+//     // test_id : [testSchema],
+//     mapping_id : String,
 //     description : String
   
-// },{ collection : 'test'});
+//   },{collection:'Investigations'});
 
-var investigationSchema = new Schema({
-    _id : String,
-    name : String,
-    classification_id : String,
-    // test_id : [testSchema],
-    mapping_id : String,
-    description : String
-  
-  },{collection:'Investigations'});
+// var locationSchema = new Schema({
+//     _id : String,
+//     latitudes : String,
+//     longitudes : String,
+//     investigation_id : String,
+//     test_id : String,
+//     timestamp : String,
+//     location_id : String,
+//     location : String
 
-var locationSchema = new Schema({
-    _id : String,
-    latitudes : String,
-    longitudes : String,
-    investigation_id : String,
-    test_id : String,
-    timestamp : String,
-    location_id : String,
-    location : String
-
-},{collection : 'Location'})
+// },{collection : 'Location'})
 
 
-module.exports = mongoose.model('NewData', locationSchema);
-module.exports = mongoose.model('InvestigationData', investigationSchema);
+module.exports = mongoose.model('Tests', testsSchema);
+// module.exports = mongoose.model('InvestigationData', investigationSchema);
   
   

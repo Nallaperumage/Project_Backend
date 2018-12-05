@@ -13,20 +13,6 @@ var db = mongoose.connect('mongodb://localhost:27017/test', function(err, respon
 
 var Schema = mongoose.Schema;
 
-// var userSchema = new Schema({
-//   email: {
-//     type: String,
-//     unique: true,
-//     required: true
-//   },
-//   name: {
-//     type: String,
-//     required: true
-//   },
-//   hash: String,
-//   salt: String
-// },{ collection : 'users'});
-
 var userSchema = new Schema({
   firstName: {
     type : String,
@@ -50,42 +36,45 @@ var userSchema = new Schema({
     type : String,
     required: true
   },
+  stripeCustomerId: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   hash: String,
   salt: String
 
 },{ collection : 'newUsers'});
 
-var loggedRouteSchema = new Schema({
-  userName : {
-    type : String,
-    unique: true,
-    required: true
-  },
-  email : {
-    type : String,
-    unique: true,
-    required: true
-  },
-  role: {
-    type : String,
-    required: true
-  }
+// var loggedRouteSchema = new Schema({
+//   userName : {
+//     type : String,
+//     unique: true,
+//     required: true
+//   },
+//   email : {
+//     type : String,
+//     unique: true,
+//     required: true
+//   },
+//   role: {
+//     type : String,
+//     required: true
+//   }
 
-},{ collection : 'newUsers'});
+// },{ collection : 'newUsers'});
 
-var loginCookieSchema = new Schema({
-  userName : {
-    type : String,
-    unique: true,
-    required: true
-  },
-  email : {
-    type : String,
-    unique: true,
-    required: true
-  }
+// var loginCookieSchema = new Schema({
+//   userName : {
+//     type : String,
+//     unique: true,
+//     required: true
+//   },
+//   email : {
+//     type : String,
+//     unique: true,
+//     required: true
+//   }
 
-},{ collection : 'newUsers'});
+// },{ collection : 'newUsers'});
 
 
 
@@ -115,28 +104,28 @@ userSchema.methods.generateJwt = function() {
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
-loggedRouteSchema.methods.generateJwt = function() {
-  var expiry = new Date();
-  expiry.setDate(expiry.getDate() + 1);
+// loggedRouteSchema.methods.generateJwt = function() {
+//   var expiry = new Date();
+//   expiry.setDate(expiry.getDate() + 1);
 
-  return jwt.sign({
-    userName: this.userName,
-    email: this.email,
-    role: this.role,
-    exp: parseInt(expiry.getTime() / 1000),
-  }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
-};
+//   return jwt.sign({
+//     userName: this.userName,
+//     email: this.email,
+//     role: this.role,
+//     exp: parseInt(expiry.getTime() / 1000),
+//   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+// };
 
-loginCookieSchema.methods.generateJwt = function() {
-  var expiry = new Date();
-  expiry.setDate(expiry.getDate() + 30);
+// loginCookieSchema.methods.generateJwt = function() {
+//   var expiry = new Date();
+//   expiry.setDate(expiry.getDate() + 30);
 
-  return jwt.sign({
-    userName: this.userName,
-    email: this.email,
-    exp: parseInt(expiry.getTime() / 1000),
-  }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
-};
+//   return jwt.sign({
+//     userName: this.userName,
+//     email: this.email,
+//     exp: parseInt(expiry.getTime() / 1000),
+//   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+// };
 
 module.exports = mongoose.model('User', userSchema);
 

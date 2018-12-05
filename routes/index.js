@@ -7,14 +7,6 @@ var auth = jwt({
   userProperty: 'payload'
 });
 
-var User = require('./users');
-var ctrlProfile = require('../public/javascripts/Controllers/profile');
-var authentication = require('../public/javascripts/Controllers/authentication');
-var getData = require('../public/javascripts/Controllers/getData');
-
-
-
-
 
 router.get('/',function(req, res, next) {
   res.sendFile(path.join(__dirname,'./angular/dist'));
@@ -22,12 +14,18 @@ router.get('/',function(req, res, next) {
 });
 
 
+var ctrlProfile = require('../public/javascripts/Controllers/profile');
+var authentication = require('../public/javascripts/Controllers/authentication');
+var getData = require('../public/javascripts/Controllers/getData');
+var Payment = require('../public/javascripts/Controllers/Payment');
+
 
 
 router.get('/user/personal-data', auth, ctrlProfile.profileRead);
-router.get('/dataPage', getData.getData);
+router.post('/user/chart-editor', getData.getData);
 router.post('/login', authentication.login);
 router.post('/signUp', authentication.register);
+router.post('/user/credit-cards', Payment.payment);
 
 // router.get('/login',function(req, res, next){
 //     userData.find()

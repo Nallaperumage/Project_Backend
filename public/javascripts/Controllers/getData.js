@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var query = mongoose.Query;
-var Data = mongoose.model('NewData');
-var subData = mongoose.model('InvestigationData');
+var Tests = mongoose.model('Tests');
+// var subData = mongoose.model('InvestigationData');
 
 module.exports.getData = function (req, res, next) {
   // var firstQuery = new query();
@@ -9,6 +9,21 @@ module.exports.getData = function (req, res, next) {
   //     firstQuery = Data.find({investigation_id : investigation_id});
   //     return firstQuery;
   // }
+  // data = req.body.params
+  // return res.status(200).json(req.body.location);
+
+  Tests.findOne({
+    test : req.body.test,
+    location : req.body.location
+  }, function(err, user){
+    if(err){
+      return res.send("Not valid credentials"+err);
+    }
+    // var sendData = new Tests;
+    // sendData.name = user.name;
+    // sendData.data = user.data;
+    return res.status(200).json(user.data);
+  })
 
   var acceptdata = {
     _id: String,
@@ -41,14 +56,14 @@ module.exports.getData = function (req, res, next) {
   //   }
   // });
 
-  subData.find({},function(err,user){
-    if(err){
-      res.send(err);
-    }
-    else{
-      res.send(user);
-    }
-  })
+  // subData.find({},function(err,user){
+  //   if(err){
+  //     res.send(err);
+  //   }
+  //   else{
+  //     res.send(user);
+  //   }
+  // })
 
 
   // subData.findById(searchInvestigations()).exec(function(err,relate){  

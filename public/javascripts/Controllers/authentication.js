@@ -15,6 +15,7 @@ module.exports.register = function(req, res) {
     user.userName = req.body.userName;
     user.email = req.body.email;
     user.role = req.body.role;
+    user.stripeCustomerId = null;
 
   
     user.setPassword(req.body.password);
