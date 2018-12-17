@@ -19,9 +19,6 @@ module.exports.getData = function (req, res, next) {
     if(err){
       return res.send("Not valid credentials"+err);
     }
-    // var sendData = new Tests;
-    // sendData.name = user.name;
-    // sendData.data = user.data;
     return res.status(200).json(user.data);
   })
 
