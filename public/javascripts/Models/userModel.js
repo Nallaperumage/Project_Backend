@@ -38,7 +38,7 @@ var userSchema = new Schema({
   },
   stripeCustomerId: String,
   resetPasswordToken: String,
-  resetPasswordExpires: Date,
+  resetTokenValidity: Boolean,
   hash: String,
   salt: String
 
@@ -94,7 +94,7 @@ userSchema.methods.generateJwt = function() {
   expiry.setDate(expiry.getDate() + 1);
 
   return jwt.sign({
-    _id: this._id,
+    // _id: this._id,
     firstName: this.firstName,
     lastName: this.lastName,
     userName: this.userName,

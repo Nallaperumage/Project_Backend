@@ -30,6 +30,8 @@ var testsSchema = new Schema({
   
 },{ collection : 'Tests'});
 
+
+
 // var investigationSchema = new Schema({
 //     _id : String,
 //     name : String,
@@ -54,6 +56,6 @@ var testsSchema = new Schema({
 
 
 module.exports = mongoose.model('Tests', testsSchema);
-// module.exports = mongoose.model('InvestigationData', investigationSchema);
+
   
   

@@ -19,7 +19,7 @@ var authentication = require('../public/javascripts/Controllers/authentication')
 var getData = require('../public/javascripts/Controllers/getData');
 var Payment = require('../public/javascripts/Controllers/Payment');
 var Mailing = require('../public/javascripts/Controllers/sendEmail');
-
+var floods = require('../public/javascripts/Controllers/floodCheck');
 
 
 router.get('/user/personal-data', auth, ctrlProfile.profileRead);
@@ -27,8 +27,10 @@ router.post('/user/chart-editor', getData.getData);
 router.post('/login', authentication.login);
 router.post('/signUp', authentication.register);
 router.post('/user/credit-cards', Payment.payment);
-router.get('/login/forgot-password', Mailing.sendEmail);
-
+router.post('/login/forgot-password', Mailing.sendEmail);
+router.post('/login/:token', authentication.resetLogin);
+router.post('/user/map-editor', floods.floodInsert);
+router.get('/user/map-editor/getCheck', floods.floodCheck);
 // router.get('/login',function(req, res, next){
 //     userData.find()
 //     .then(function (doc){
