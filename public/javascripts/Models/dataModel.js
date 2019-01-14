@@ -13,7 +13,6 @@ var Schema = mongoose.Schema;
 
 var testsSchema = new Schema({
     _id : String,
-    // investigation_id : [investigationSchema],
     name : String,
     type : String,
     test : String,

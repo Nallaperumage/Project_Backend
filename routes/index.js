@@ -23,6 +23,8 @@ var floods = require('../public/javascripts/Controllers/floodCheck');
 
 
 router.get('/user/personal-data', auth, ctrlProfile.profileRead);
+router.get('/user/activity', auth, ctrlProfile.activityRead);
+router.post('/user/personal-data', ctrlProfile.profileSet);
 router.post('/user/chart-editor', getData.getData);
 router.post('/login', authentication.login);
 router.post('/signUp', authentication.register);
@@ -31,6 +33,11 @@ router.post('/login/forgot-password', Mailing.sendEmail);
 router.post('/login/:token', authentication.resetLogin);
 router.post('/user/map-editor', floods.floodInsert);
 router.get('/user/map-editor/getCheck', floods.floodCheck);
+router.get('/service/floodCheck', floods.floodCheck);
+router.post('/service/payment', Payment.payment);
+router.get('/service/dataCheck', floods.dataCheck);
+
+
 // router.get('/login',function(req, res, next){
 //     userData.find()
 //     .then(function (doc){

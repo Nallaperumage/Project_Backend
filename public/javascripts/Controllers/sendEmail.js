@@ -53,7 +53,7 @@ module.exports.sendEmail = function(req, res, next){
         
         user.save(function(err) {
             let mailOptions = {
-                from: '"Fred Foo 👻" <gmadhushann@gmail.com>',
+                from: '"SLGSP 👻" <gmadhushann@gmail.com>',
                 to: 'gmadhushann@gmail.com', 
                 subject: 'Recover Password', 
                 text: 'Hello '+user.userName+
@@ -85,4 +85,36 @@ module.exports.sendEmail = function(req, res, next){
         })
     })
 
+}
+
+module.exports.sendEmailCustomer = function(customerEmail, geologistEmail){
+    User.findOne({
+        email: customerEmail
+    }, function (err, user) {
+        let mailOptions = {
+            from: '"SLGSP 👻" <gmadhushann@gmail.com>',
+            to: customerEmail, 
+            subject: 'Investigation Done!', 
+            text: 'Hello '+user.userName+
+            'Your Investigation result has been added to our database by '+geologistEmail+'.'+
+            'Please go and check your account'+
+            'Best regards,'+
+            'SLGSP', 
+            html: 'Hello <strong>'+user.userName+
+            '</strong>,<br><br>Your Investigation result has been added to our database by '+geologistEmail+'.<br>'+
+            'Please go and check your account.'+
+            '<br><br><strong>Best regards</strong>,'+
+            '<br><i>SLGSP</i>'
+        };
+
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                return err;
+            }
+            
+            console.log('Message sent: %s', info.messageId);
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            return info;
+        });
+})
 }

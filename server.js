@@ -10,6 +10,7 @@ const nodemailer = require('nodemailer');
 
 require('./public/javascripts/Models/userModel');
 require('./public/javascripts/Models/floodModel');
+require('./public/javascripts/Models/servicesModel');
 require('./public/javascripts/Models/dataModel');
 require('./public/javascripts/config/passport');
 require('./public/javascripts/config/nodemailer');

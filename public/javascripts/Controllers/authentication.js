@@ -16,6 +16,7 @@ module.exports.register = function(req, res) {
     user.email = req.body.email;
     user.role = req.body.role;
     user.stripeCustomerId = null;
+    user.discount = 0;
     user.resetPasswordToken = null;
     user.resetTokenValidity = false;
 

@@ -3,6 +3,16 @@ var query = mongoose.Query;
 var Tests = mongoose.model('Tests');
 // var subData = mongoose.model('InvestigationData');
 
+module.exports.testDataCheck = function (req, res, next) {
+  tests.find().ecec().then(
+    function(data, err){
+      if(err){
+        return res.send("Not found");
+      }
+      return res.status(200).json(data);
+  })
+}
+
 module.exports.getData = function (req, res, next) {
   // var firstQuery = new query();
   // function searchInvestigations(investigation_id){
@@ -15,11 +25,11 @@ module.exports.getData = function (req, res, next) {
   Tests.findOne({
     test : req.body.test,
     location : req.body.location
-  }, function(err, user){
+  }, function(err, locdata){
     if(err){
       return res.send("Not valid credentials"+err);
     }
-    return res.status(200).json(user.data);
+    return res.status(200).json(locdata.data);
   })
 
   var acceptdata = {

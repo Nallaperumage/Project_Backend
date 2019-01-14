@@ -37,12 +37,31 @@ var userSchema = new Schema({
     required: true
   },
   stripeCustomerId: String,
+  discount : Number,
   resetPasswordToken: String,
   resetTokenValidity: Boolean,
   hash: String,
   salt: String
 
 },{ collection : 'newUsers'});
+
+var availabilitySchema = new Schema({
+  geologistEmail : String,
+  availability : String
+},{ collection : 'AvailableGeologists'});
+
+var assignmentsSchema = new Schema({
+  customerEmail : String,
+  geologistEmail : String,
+  investigationName : String,
+  dueDate : String,
+  startDate : String,
+  fullCharge : Number,
+  downPayment : Number,
+  clearance : Number,
+  fine : Number,
+  completion : String
+},{ collection : 'Assignments'});
 
 // var loggedRouteSchema = new Schema({
 //   userName : {
@@ -94,7 +113,7 @@ userSchema.methods.generateJwt = function() {
   expiry.setDate(expiry.getDate() + 1);
 
   return jwt.sign({
-    // _id: this._id,
+    _id: this._id,
     firstName: this.firstName,
     lastName: this.lastName,
     userName: this.userName,
@@ -128,6 +147,7 @@ userSchema.methods.generateJwt = function() {
 // };
 
 module.exports = mongoose.model('User', userSchema);
-
+module.exports = mongoose.model('AvailableGeologists', availabilitySchema);
+module.exports = mongoose.model('Assignments', assignmentsSchema);
 
 
